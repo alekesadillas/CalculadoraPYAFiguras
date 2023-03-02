@@ -1,0 +1,154 @@
+package ejercicio_10;
+
+
+import LibreriaAYPFiguras.AreaYPerimetro;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.WindowConstants;
+
+
+public class Ejercicio_10 {
+
+    public static void main(String[] args) {
+     
+ JFrame  objeto_formularioperimetro = new JFrame("Obtener el perimetro de figuras geometricas");
+      JLabel objeto_etiqueta_1 = new JLabel("Selecciona...");
+      JLabel objeto_etiqueta_mensaje = new JLabel("Autor: Santiago Sanchez K.Alejandro");
+
+        JRadioButton  objeto_radiobutton_A  = new JRadioButton("Perimetro de cuadrado");
+        JRadioButton  objeto_radiobutton_B  = new JRadioButton("Perimetro de rectangulo");
+        JRadioButton  objeto_radiobutton_C  = new JRadioButton("Perimetro de triangulo");
+        ButtonGroup objeto_buttongrupo_p  = new ButtonGroup();
+        JButton objeto_boton_calcular = new JButton("Calcular perimetro ");
+        JButton objeto_boton_terminar = new JButton("Terminar");
+        JButton objeto_boton_limpiar = new JButton("Limpiar");
+        AreaYPerimetro PCuadrado = new AreaYPerimetro();
+        AreaYPerimetro PRectangulo = new AreaYPerimetro();
+        AreaYPerimetro PTriangulo = new AreaYPerimetro();
+        
+        objeto_buttongrupo_p.add(objeto_radiobutton_A);
+        objeto_buttongrupo_p.add(objeto_radiobutton_B);
+        objeto_buttongrupo_p.add(objeto_radiobutton_C);
+                
+       objeto_formularioperimetro.add(objeto_etiqueta_1);
+       objeto_formularioperimetro.add(objeto_etiqueta_mensaje);
+       objeto_formularioperimetro.add(objeto_radiobutton_A);
+       objeto_formularioperimetro.add(objeto_radiobutton_B);
+       objeto_formularioperimetro.add(objeto_radiobutton_C);
+       objeto_formularioperimetro.add(objeto_boton_calcular);
+       objeto_formularioperimetro.add(objeto_boton_terminar);
+       objeto_formularioperimetro.add(objeto_boton_limpiar);
+       //administrador de diseño
+        objeto_formularioperimetro.setLayout(null);
+       //indicar en que posicion de la ventana deseas que aparezcan las etiquetas
+        objeto_etiqueta_1.setBounds(10, 30, 200, 30);
+        objeto_radiobutton_A.setBounds(10, 60, 200, 30);
+        objeto_radiobutton_B.setBounds(10, 80, 200, 30);
+        objeto_radiobutton_C.setBounds(10, 100, 200, 30);
+        objeto_etiqueta_mensaje.setBounds(400, 30, 200, 30);
+     
+        objeto_boton_calcular.setBounds(100, 200, 200, 30);
+        objeto_boton_terminar.setBounds(400, 200, 200, 30);
+        objeto_boton_limpiar.setBounds(700, 200, 200, 30);
+        
+        
+       objeto_formularioperimetro.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+       objeto_formularioperimetro.setLocationRelativeTo(null);
+       objeto_formularioperimetro.setSize(600,400);
+       objeto_formularioperimetro.setVisible(true);
+
+        objeto_boton_terminar.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent ae) {
+                  
+                    System.exit(0);
+              }
+          });// TODO code application logic here
+
+        objeto_boton_limpiar.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent ae) {
+                  objeto_radiobutton_A.setSelected(true);
+                  objeto_radiobutton_B.setSelected(false);
+                  objeto_radiobutton_C.setSelected(false);
+                  objeto_etiqueta_mensaje.setText(".");
+
+              }
+          });// TODO code application logic here
+        objeto_boton_calcular.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent ae) {
+                String res = "" ;
+                String res2 = "";
+                double lado = 0;
+                double base = 0;
+                double altura = 0;
+                double perimetrocuadrado=0;
+                double perimetrorectangulo=0;
+                double perimetrotriangulo=0;
+                
+                
+                if (objeto_radiobutton_A.isSelected())
+                  {
+                       res = JOptionPane.showInputDialog("Captura el valor de lado");
+                       if (res==null)
+                       { 
+                           JOptionPane.showMessageDialog(null,  "No escribio..");
+                       
+                       }
+                       else
+                       {
+                           lado = Double.valueOf(res);
+                           perimetrocuadrado = PCuadrado.PerimetroCuadrado(lado);
+                          JOptionPane.showMessageDialog(null, "El perimetro de un cuadrado es "+ perimetrocuadrado);
+                       }
+                              }
+                  else if (objeto_radiobutton_B.isSelected())
+                  {
+                       res = JOptionPane.showInputDialog("Captura el valor de la base");
+                       res2 = JOptionPane.showInputDialog("Captura el valor de la altura");
+
+                       if (res==null)
+                       { 
+                           JOptionPane.showMessageDialog(null,  "No escribio..");
+                       
+                       }
+                       else
+                       {
+                       base = Double.valueOf(res);
+                       altura= Double.valueOf(res2);
+                       perimetrorectangulo = PRectangulo.PerimetroRectangulo(base, altura);
+                       JOptionPane.showMessageDialog(null, "El perimetro del rectangulo es "+ perimetrorectangulo);
+                       }  
+                  }
+                  else if (objeto_radiobutton_C.isSelected())
+                  {
+                      
+                       res = JOptionPane.showInputDialog("Captura el valor de un lado");
+                       if (res==null)
+                       { 
+                           JOptionPane.showMessageDialog(null,  "No escribio..");
+                       
+                       }
+                       else
+                       {
+                       base = Double.valueOf(res);
+                       perimetrotriangulo = PTriangulo.PerimetroTriangulo(base, altura);
+                       JOptionPane.showMessageDialog(null, "El perimetro del rectangulo es "+ perimetrotriangulo);
+                       }  
+                      
+                  }
+
+                  
+              }
+          });
+
+    }
+    
+}
